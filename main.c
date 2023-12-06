@@ -26,3 +26,73 @@ typedef struct
     int maxCal;
     int minCal;
 } Plano;
+
+int menu();
+
+int main()
+{
+    int opcao;
+    Pessoa pessoas[100];
+    Dieta dietas[100];
+    Plano planos[20]; 
+    int numPessoas = 0;
+
+    do
+    {
+        opcao = menu();
+        switch (opcao)
+        {
+        case 1:
+            
+            
+            break;
+        case 2:
+           
+            
+            break;
+        case 3:
+           
+            break;
+        case 4:
+           
+            break;
+        
+        case 5:
+           
+            break;
+        case 6:
+           
+            break;
+        case 7:
+           
+            break;
+        case 8:
+           
+            break;
+        }
+    } while (opcao != 0);
+
+    return 0;
+}
+
+int menu()
+{
+    int op;
+    do
+    {
+        printf("M E N U\n");
+        printf("1 - Inserir Pessoa\n");
+        printf("2 - Inserir Plano\n");
+        printf("3 - Inserir Dieta\n");
+        printf("4 - Numero de pessoas a exceder o plano\n");
+        printf("5 - Pessoas que nao cumpriram o plano (ordem decrescente)\n");
+        printf("6 - Lista plano nutricional\n");
+        printf("7 - Calculos das medias de calorias\n");
+        printf("8 - Gerar Tabela\n");
+        printf("9 - Guardar\n");
+        printf("0 - Sair\n");
+        printf("Opcao?");
+        scanf("%d", &op);
+    } while ((op < 0) || (op > 10));
+    return (op);
+}
