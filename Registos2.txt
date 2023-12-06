@@ -1,0 +1,92 @@
+0001;2023-01-10;almoço;Avocado toast with poached eggs;400
+0003;2023-01-03;pequeno almoço;Smoothie bowl with mixed berries;300
+0002;2023-01-25;jantar;Baked salmon with quinoa;550
+0003;2023-01-17;jantar;Stir-fried tofu with vegetables;500
+0001;2023-01-05;almoço;Chicken Caesar salad;450
+0002;2023-01-20;pequeno almoço;Pancakes with maple syrup;600
+0001;2023-01-12;jantar;Beef stir-fry with broccoli;700
+0003;2023-01-08;almoço;Quinoa and vegetable stir-fry;400
+0002;2023-01-02;pequeno almoço;Overnight oats with almond butter;350
+0002;2023-01-18;almoço;Spinach and feta omelette;500
+0001;2023-01-22;jantar;Shrimp scampi with pasta;600
+0003;2023-01-15;pequeno almoço;Whole grain toast with avocado;300
+0003;2023-01-29;jantar;Grilled chicken with sweet potato fries;650
+0001;2023-01-19;pequeno almoço;Greek yogurt parfait with granola;350
+0002;2023-01-07;almoço;Lentil soup with whole-grain bread;450
+0001;2023-01-14;jantar;Turkey and vegetable stir-fry;550
+0003;2023-01-09;pequeno almoço;Scrambled eggs with spinach;300
+0002;2023-01-24;almoço;Quinoa salad with chickpeas;500
+0002;2023-01-27;almoço;Tuna salad wrap;450
+0001;2023-01-13;jantar;Salmon teriyaki with brown rice;600
+0003;2023-01-06;pequeno almoço;Banana walnut muffins;350
+0003;2023-01-28;jantar;Spaghetti bolognese;700
+0001;2023-01-11;almoço;Caprese sandwich with mixed greens;400
+0002;2023-01-04;pequeno almoço;Fruit smoothie with protein powder;300
+0002;2023-01-21;almoço;Vegetable and hummus wrap;450
+0001;2023-01-16;jantar;Grilled steak with roasted vegetables;650
+0003;2023-01-23;pequeno almoço;Blueberry pancakes;350
+0003;2023-01-26;jantar;Chicken and broccoli Alfredo;700
+0001;2023-01-01;pequeno almoço;Oatmeal with fruits;300
+0002;2023-01-30;almoço;Quinoa bowl with roasted vegetables;500
+0001;2023-01-31;jantar;Margherita pizza;800
+0003;2023-01-08;pequeno almoço;Chia seed pudding with berries;350
+0002;2023-01-16;almoço;Shrimp and vegetable stir-fry;500
+0002;2023-01-12;almoço;Chicken avocado salad;450
+0001;2023-01-24;pequeno almoço;Waffle with strawberries and whipped cream;400
+0003;2023-01-04;jantar;Eggplant Parmesan with whole-grain spaghetti;600
+0003;2023-01-20;jantar;Teriyaki tofu with brown rice;550
+0001;2023-01-15;almoço;Quinoa and black bean stuffed peppers;500
+0002;2023-01-06;pequeno almoço;Toasted bagel with cream cheese and smoked salmon;450
+0002;2023-01-18;jantar;BBQ chicken with sweet potato wedges;700
+0001;2023-01-09;almoço;Lentil and vegetable curry;450
+0003;2023-01-27;pequeno almoço;Apple cinnamon oatmeal;350
+0003;2023-01-02;jantar;Caesar salad with grilled shrimp;600
+0001;2023-01-19;almoço;Turkey and cranberry wrap;400
+0002;2023-01-11;pequeno almoço;Avocado and tomato toast;300
+0002;2023-01-25;almoço;Caprese pasta salad;500
+0001;2023-01-28;jantar;Beef and vegetable kebabs;650
+0003;2023-01-14;pequeno almoço;Yogurt with granola and mixed nuts;350
+0003;2023-01-23;almoço;Pesto chicken with roasted vegetables;550
+0001;2023-01-30;jantar;Mushroom risotto;600
+0002;2023-01-07;pequeno almoço;Breakfast burrito with eggs and vegetables;450
+0002;2023-01-22;jantar;Baked cod with quinoa;650
+0001;2023-01-05;almoço;Spinach and feta stuffed chicken breast;500
+0003;2023-01-13;pequeno almoço;Orange and cranberry muffins;300
+0003;2023-01-17;jantar;Spicy black bean burgers with sweet potato fries;700
+0001;2023-01-21;almoço;Mediterranean couscous salad;450
+0002;2023-01-03;pequeno almoço;Banana and walnut smoothie;350
+0001;2023-01-02;pequeno almoço;Chia seed pudding with mango;300
+0003;2023-01-07;jantar;Vegetarian pad Thai;600
+0002;2023-01-14;almoço;Quinoa and vegetable stuffed bell peppers;500
+0003;2023-01-18;jantar;Mushroom and spinach risotto;700
+0001;2023-01-21;almoço;Turkey and avocado wrap;450
+0002;2023-01-28;pequeno almoço;Peanut butter and banana smoothie;350
+0001;2023-01-03;jantar;Grilled shrimp skewers with couscous;650
+0003;2023-01-11;almoço;Mediterranean chickpea salad;400
+0002;2023-01-16;pequeno almoço;Acai bowl with granola and berries;350
+0002;2023-01-22;jantar;Chicken fajita bowl;700
+0001;2023-01-25;pequeno almoço;Scrambled eggs with smoked salmon;400
+0003;2023-01-30;jantar;Vegetable stir-fry with tofu;550
+0001;2023-01-04;almoço;Caprese salad with balsamic glaze;450
+0002;2023-01-09;pequeno almoço;Protein-packed smoothie with spinach;350
+0003;2023-01-13;jantar;Cauliflower crust pizza with vegetables;600
+0001;2023-01-19;almoço;Shrimp and quinoa bowl;500
+0002;2023-01-24;pequeno almoço;Omelette with mushrooms and cheese;450
+0003;2023-01-29;jantar;Salmon with mango salsa;650
+0002;2023-01-05;almoço;Black bean and corn salad;400
+0001;2023-01-08;pequeno almoço;Pineapple and coconut smoothie bowl;350
+0003;2023-01-15;jantar;Lentil curry with brown rice;700
+0001;2023-01-20;almoço;Greek chicken souvlaki;500
+0002;2023-01-26;pequeno almoço;Whole grain toast with almond butter;350
+0003;2023-01-31;jantar;Vegetable lasagna;600
+0001;2023-01-06;almoço;Cobb salad with grilled chicken;450
+0002;2023-01-12;pequeno almoço;Berry and spinach smoothie;300
+0003;2023-01-17;jantar;Sweet potato and black bean enchiladas;550
+0001;2023-01-23;almoço;Spinach and feta stuffed mushrooms;400
+
+
+
+
+
+
+
