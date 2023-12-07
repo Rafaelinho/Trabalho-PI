@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 
 // Function prototypes
 typedef struct 
@@ -21,7 +20,9 @@ typedef struct
 typedef struct
 {
     int id;
-    int data[11];
+    int dia;
+    int mês;
+    int ano;
     char tipoRefeicao[20];
     int maxCal;
     int minCal;
@@ -81,9 +82,9 @@ int menu()
     do
     {
         printf("M E N U\n");
-        printf("1 - Inserir Pessoa\n");
-        printf("2 - Inserir Plano\n");
-        printf("3 - Inserir Dieta\n");
+        printf("1 - -\n");
+        printf("2 - -\n");
+        printf("3 - -\n");
         printf("4 - Numero de pessoas a exceder o plano\n");
         printf("5 - Pessoas que nao cumpriram o plano (ordem decrescente)\n");
         printf("6 - Lista plano nutricional\n");
