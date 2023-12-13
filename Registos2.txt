@@ -17,7 +17,7 @@
 0003;2023-01-09;pequeno almoço;Scrambled eggs with spinach;300
 0002;2023-01-24;almoço;Quinoa salad with chickpeas;500
 0002;2023-01-27;almoço;Tuna salad wrap;450
-0001;2023-01-13;jantar;Salmon teriyaki with brown rice;600
+0001;2023-01-13;jantar;Salmon teriyaki with brown rice;1600
 0003;2023-01-06;pequeno almoço;Banana walnut muffins;350
 0003;2023-01-28;jantar;Spaghetti bolognese;700
 0001;2023-01-11;almoço;Caprese sandwich with mixed greens;400

@@ -1,6 +1,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <locale.h>
+#include <stdbool.h>
+#include <string.h>
 
 #pragma region Estruturas de Armazenamento
 
@@ -36,10 +38,10 @@ typedef struct
 #pragma endregion
 
 int menu();
-void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int maxCalories, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 int comparaData(int year1, int month1, int day1, int year2, int month2, int day2);
-
-
+void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int maxCalories, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
+void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano planos[], int numDietas, int numPessoas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
+bool pessoaExcedeuPlano(Dieta dietas[], Plano planos[], Pessoa pessoas[], int pessoaID, int numDietas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 
 int main()
 {
@@ -124,8 +126,21 @@ int main()
 
             }
             
-            break;
+            
         case 2:
+            {
+                int startDia, startMes, startAno, endDia, endMes, endAno;
+
+                printf("Enter the start date (YYYY-MM-DD): ");
+                scanf("%d-%d-%d", &startAno, &startMes, &startDia);
+
+                printf("Enter the end date (YYYY-MM-DD): ");
+                scanf("%d-%d-%d", &endAno, &endMes, &endDia);
+
+                listaNaoCumpridoresDecrescente(dietas, pessoas, planos, numDietas, numPessoas, numPlanos, startDia, startMes, startAno, endDia, endMes, endAno);
+                system("pause");
+                break;
+            }
           
             break;
         case 3:
@@ -178,12 +193,22 @@ int menu()
     return (op);
 }
 
-//Funcao listar pessoas a exceder o plano
+
+// Função para comparar datas 
+int comparaData(int ano1, int mes1, int dia1, int ano2, int mes2, int dia2) {
+    if (ano1 != ano2) {     // Se o ano não for igual retorna a diferença entre eles
+        return ano1 - ano2; // Se for igual passa à próxima condição
+    } else if (mes1 != mes2) {
+        return mes1 - mes2; // Retorna a diferença se o mês não for igual
+    } else {
+        return dia1 - dia2; // retorna a diferença do dia
+    }
+}
 
 
-
+//Funcao listar pessoas a exceder determinado limite de calorias em determinado período
 void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int caloriasLimite, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) {
-    int count = 0;
+    int countPessoas = 0;
 
     printf("Pacientes a exceder %d calorias\n\n", caloriasLimite);
 
@@ -199,25 +224,50 @@ void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, 
 
         if (totalCalorias > caloriasLimite) {
             printf("ID Paciente : %d\n - Nome: %s\n - Calorias ingeridas: %d\n\n", pessoas[i].id, pessoas[i].nome, totalCalorias);
-            ++count;
+            ++countPessoas;
         }
     }
 
-    printf("Numero de pacientes que ingeriram mais de %d calorias: %d\n", caloriasLimite, count);
+    printf("Numero de pacientes que ingeriram mais de %d calorias: %d\n", caloriasLimite, countPessoas);
 }
 
 
 
-// Função para comparar datas 
-int comparaData(int ano1, int mes1, int dia1, int ano2, int mes2, int dia2) {
-    if (ano1 != ano2) {     // Se o ano não for igual retorna a diferença entre eles
-        return ano1 - ano2; // Se for igual passa à próxima condição
-    } else if (mes1 != mes2) {
-        return mes1 - mes2; // Retorna a diferença se o mês não for igual
-    } else {
-        return dia1 - dia2; // retorna a diferença do dia
+// Função que retorna verdadeiro ou falso se o paciente ultrapassou as calorias máxmimas em cada dia do plano, em determinado período de tempo, 
+bool pessoaExcedeuPlano(Dieta dietas[], Plano planos[], Pessoa pessoas[], int pessoaID, int numDietas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) {
+    bool pessoaExcedeu = false;
+
+    for (int i = 0; i < numPlanos; ++i) {
+        if (pessoaID == planos[i].id) {
+            for (int j = 0; j < numDietas; ++j) {
+                if (pessoaID == dietas[j].id && planos[i].dia == dietas[j].dia && dietas[j].calorias > planos[i].maxCal &&
+                    comparaData(dietas[j].ano, dietas[j].mes, dietas[j].dia, startAno, startMes, startDia) >= 0 &&
+                    comparaData(endAno, endMes, endDia, dietas[j].ano, dietas[j].mes, dietas[j].dia) >= 0 &&
+                    strcmp(dietas[j].tipoRefeicao, planos[i].tipoRefeicao) == 0) {
+                    printf("ID Paciente: %d\n - Nome: %s\n - Dia do Plano Excedido: %d\n - Tipo de Refeição: %s\n - Diferença de Calorias: %d\n\n",
+                           pessoaID, pessoas[pessoaID-1].nome, dietas[j].dia, dietas[j].tipoRefeicao, dietas[j].calorias - planos[i].maxCal);
+                    pessoaExcedeu = true;
+                }
+            }
+        }
+    }
+
+    return pessoaExcedeu;
+}
+
+
+
+
+//Função listar pessoas que não cumpriram o plano em determinado período, por ordem decrescente (do id da pessoa)
+void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano planos[], int numDietas, int numPessoas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) {
+    printf("Pessoas que não cumpriram o plano no período especificado (ordem decrescente):\n");
+
+    for (int i = 0; i < numPessoas; ++i) {
+        pessoaExcedeuPlano(dietas, planos, pessoas, pessoas[i].id, numDietas, numPlanos, startDia, startMes, startAno, endDia, endMes, endAno);
     }
 }
+
+
 
 
 
