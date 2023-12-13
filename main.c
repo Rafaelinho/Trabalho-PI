@@ -104,16 +104,6 @@ int main()
         switch (opcao)
         {
         case 1:
-            
-            
-            break;
-        case 2:
-          
-            break;
-        case 3:
-           
-            break;
-        case 4:
             {
 
                 int startDia, startMes, startAno, endDia, endMes, endAno;
@@ -133,6 +123,19 @@ int main()
                 break;
 
             }
+            
+            break;
+        case 2:
+          
+            break;
+        case 3:
+           
+            break;
+        case 4:
+        
+
+            break;
+
         case 5:
            
             break;
@@ -159,15 +162,15 @@ int menu()
     do
     {
         printf("M E N U\n");
-        printf("1 - -\n");
-        printf("2 - -\n");
-        printf("3 - -\n");
-        printf("4 - Numero de pessoas a exceder o plano\n");
-        printf("5 - Pessoas que nao cumpriram o plano (ordem decrescente)\n");
-        printf("6 - Lista plano nutricional\n");
-        printf("7 - Calculos das medias de calorias\n");
-        printf("8 - Gerar Tabela\n");
-        printf("9 - Guardar\n");
+        printf("1 - Numero de pessoas a exceder determinado numero de calorias\n");
+        printf("2 - Pessoas que nao cumpriram o plano (ordem decrescente)\n");
+        printf("3 - Lista plano nutricional\n");
+        printf("4 - Calculos das medias de calorias\n");
+        printf("5 - Gerar Tabela\n");
+        printf("6 - -\n");
+        printf("7 - -\n");
+        printf("8 - -\n");
+        printf("9 - Guardar tabela\n");
         printf("0 - Sair\n");
         printf("Opcao?");
         scanf("%d", &op);
@@ -182,7 +185,7 @@ int menu()
 void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int caloriasLimite, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) {
     int count = 0;
 
-    printf("Pacientes a exceder %d calorias\n", caloriasLimite);
+    printf("Pacientes a exceder %d calorias\n\n", caloriasLimite);
 
     for (int i = 0; i < numPessoas; ++i) {
         int totalCalorias = 0;
@@ -195,7 +198,7 @@ void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, 
         }
 
         if (totalCalorias > caloriasLimite) {
-            printf("Paciente ID: %d, Nome: %s, Calorias ingeridas: %d\n", pessoas[i].id, pessoas[i].nome, totalCalorias);
+            printf("ID Paciente : %d\n - Nome: %s\n - Calorias ingeridas: %d\n\n", pessoas[i].id, pessoas[i].nome, totalCalorias);
             ++count;
         }
     }
