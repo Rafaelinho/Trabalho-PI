@@ -43,7 +43,7 @@ void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, 
 void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano planos[], int numDietas, int numPessoas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 bool pessoaExcedeuPlano(Dieta dietas[], Plano planos[], Pessoa pessoas[], int pessoaID, int numDietas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numDietas, int numPlanos, int numPessoas, int pessoaID, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno, const char *tipoRefeicao);
-
+void calcularMediasCalorias(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 
 int main()
 {
@@ -80,20 +80,23 @@ int main()
     // Corrected loop for reading data into the dietas array
     while (fscanf(fileDietas, "%d;%d-%d-%d;%29[^;];%59[^;];%d", 
             &dietas[numDietas].id, &dietas[numDietas].ano, &dietas[numDietas].mes, &dietas[numDietas].dia, 
-            dietas[numDietas].tipoRefeicao, dietas[numDietas].alimento, &dietas[numDietas].calorias) == 7) {
+            dietas[numDietas].tipoRefeicao, dietas[numDietas].alimento, &dietas[numDietas].calorias) == 7) 
+    {
         numDietas++;
-}
+    }
 
     fclose(fileDietas);
 
 
     FILE *filePlanos = fopen("Registos3.txt", "r");
-    if (filePlanos == NULL) {
+    if (filePlanos == NULL) 
+    {
         printf("Error opening file.\n");
         return 1; // Return an error code
     }
 
-    while (fscanf(filePlanos, "%d;%d-%d-%d;%19[^;];%d;%d", &planos[numPlanos].id, &planos[numPlanos].ano, &planos[numPlanos].mes, &planos[numPlanos].dia, planos[numPlanos].tipoRefeicao, &planos[numPlanos].minCal, &planos[numPlanos].maxCal) == 7) {
+    while (fscanf(filePlanos, "%d;%d-%d-%d;%19[^;];%d;%d", &planos[numPlanos].id, &planos[numPlanos].ano, &planos[numPlanos].mes, &planos[numPlanos].dia, planos[numPlanos].tipoRefeicao, &planos[numPlanos].minCal, &planos[numPlanos].maxCal) == 7) 
+    {
         numPlanos++;
     }
 
@@ -127,7 +130,6 @@ int main()
                 break;
 
             }
-            
             
         case 2:
             {
@@ -166,10 +168,22 @@ int main()
                 system("pause");
                 break;
             }
+
         case 4:
         
+            {
+                int startDia, startMes, startAno, endDia, endMes, endAno;
 
-            break;
+                printf("Insira a data de Inicio (YYYY-MM-DD): ");
+                scanf("%d-%d-%d", &startAno, &startMes, &startDia);
+
+                printf("Insira a data de Fim (YYYY-MM-DD): ");
+                scanf("%d-%d-%d", &endAno, &endMes, &endDia);
+
+                calcularMediasCalorias(dietas, pessoas, numDietas, numPessoas, startDia, startMes, startAno, endDia, endMes, endAno);
+                system("pause");
+                break;
+            }
 
         case 5:
            
@@ -288,7 +302,8 @@ void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano plan
 
 
 
-void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numDietas, int numPlanos, int numPessoas, int pessoaID, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno, const char *tipoRefeicao) {
+void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numDietas, int numPlanos, int numPessoas, int pessoaID, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno, const char *tipoRefeicao) 
+{
     printf("Plano da Pessoa %d para o periodo de %d-%02d-%02d a %d-%02d-%02d e tipo de refeicao %s:\n", pessoaID, startAno, startMes, startDia, endAno, endMes, endDia, tipoRefeicao);
 
     bool found = false;  // Add a flag to check if any plano is found
@@ -313,7 +328,28 @@ void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numD
     }
 }
 
+void calcularMediasCalorias(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) 
+{
+    printf("Medias de calorias consumidas por refeicao por cada paciente:\n");
 
+    for (int i = 0; i < numPessoas; ++i) {
+        int totalCalorias = 0;
+        int numRefeicoes = 0;
+
+        for (int j = 0; j < numDietas; ++j) {
+            if (pessoas[i].id == dietas[j].id && comparaData(startAno, startMes, startDia, dietas[j].ano, dietas[j].mes, dietas[j].dia) <= 0 &&
+                comparaData(dietas[j].ano, dietas[j].mes, dietas[j].dia, endAno, endMes, endDia) <= 0) {
+                totalCalorias += dietas[j].calorias;
+                numRefeicoes++;
+            }
+        }
+
+        if (numRefeicoes > 0) {
+            double mediaCalorias = (double)totalCalorias / numRefeicoes;
+            printf("ID Paciente : %d\n - Nome: %s\n - Media de Calorias por Refeicaoo: %.2lf\n\n", pessoas[i].id, pessoas[i].nome, mediaCalorias);
+        }
+    }
+}
 
 
 
