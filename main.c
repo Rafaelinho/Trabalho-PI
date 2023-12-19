@@ -42,6 +42,8 @@ int comparaData(int year1, int month1, int day1, int year2, int month2, int day2
 void listaPessoasExcederLimite(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int maxCalories, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano planos[], int numDietas, int numPessoas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 bool pessoaExcedeuPlano(Dieta dietas[], Plano planos[], Pessoa pessoas[], int pessoaID, int numDietas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
+void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numDietas, int numPlanos, int numPessoas, int pessoaID, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno, const char *tipoRefeicao);
+
 
 int main()
 {
@@ -91,7 +93,7 @@ int main()
         return 1; // Return an error code
     }
 
-    while (fscanf(filePlanos, "%d;%d-%d-%d;%19[^;];%d;%d", &planos[numPlanos].id, &planos[numPlanos].ano, &planos[numPlanos].mes, &planos[numPlanos].dia, planos[numPlanos].tipoRefeicao, &planos[numPlanos].maxCal, &planos[numPlanos].minCal) == 7) {
+    while (fscanf(filePlanos, "%d;%d-%d-%d;%19[^;];%d;%d", &planos[numPlanos].id, &planos[numPlanos].ano, &planos[numPlanos].mes, &planos[numPlanos].dia, planos[numPlanos].tipoRefeicao, &planos[numPlanos].minCal, &planos[numPlanos].maxCal) == 7) {
         numPlanos++;
     }
 
@@ -131,10 +133,10 @@ int main()
             {
                 int startDia, startMes, startAno, endDia, endMes, endAno;
 
-                printf("Enter the start date (YYYY-MM-DD): ");
+                printf("Insira a data de inicio (YYYY-MM-DD): ");
                 scanf("%d-%d-%d", &startAno, &startMes, &startDia);
 
-                printf("Enter the end date (YYYY-MM-DD): ");
+                printf("Insira a data de fim (YYYY-MM-DD): ");
                 scanf("%d-%d-%d", &endAno, &endMes, &endDia);
 
                 listaNaoCumpridoresDecrescente(dietas, pessoas, planos, numDietas, numPessoas, numPlanos, startDia, startMes, startAno, endDia, endMes, endAno);
@@ -142,10 +144,28 @@ int main()
                 break;
             }
           
-            break;
         case 3:
-           
-            break;
+
+            {
+                int pessoaID, startDia, startMes, startAno, endDia, endMes, endAno;
+                char tipoRefeicao[30];
+
+                printf("ID do paciente: ");
+                scanf("%d", &pessoaID);
+
+                printf("Insira a data de inicio (YYYY-MM-DD): ");
+                scanf("%d-%d-%d", &startAno, &startMes, &startDia);
+
+                printf("Insira a data de fim (YYYY-MM-DD): ");
+                scanf("%d-%d-%d", &endAno, &endMes, &endDia);
+
+                printf("Tipo de refeicao ? (pequeno almoco / almoco / jantar): ");
+                scanf("%s", tipoRefeicao);
+
+                listaPlanoPessoa(dietas, planos, pessoas, numDietas, numPlanos, numPessoas, pessoaID, startDia, startMes, startAno, endDia, endMes, endAno, tipoRefeicao);
+                system("pause");
+                break;
+            }
         case 4:
         
 
@@ -257,7 +277,6 @@ bool pessoaExcedeuPlano(Dieta dietas[], Plano planos[], Pessoa pessoas[], int pe
 
 
 
-
 //Função listar pessoas que não cumpriram o plano em determinado período, por ordem decrescente (do id da pessoa)
 void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano planos[], int numDietas, int numPessoas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) {
     printf("Pessoas que não cumpriram o plano no período especificado (ordem decrescente):\n");
@@ -269,6 +288,30 @@ void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano plan
 
 
 
+void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numDietas, int numPlanos, int numPessoas, int pessoaID, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno, const char *tipoRefeicao) {
+    printf("Plano da Pessoa %d para o periodo de %d-%02d-%02d a %d-%02d-%02d e tipo de refeicao %s:\n", pessoaID, startAno, startMes, startDia, endAno, endMes, endDia, tipoRefeicao);
+
+    bool found = false;  // Add a flag to check if any plano is found
+
+    for (int j = 0; j < numPlanos; ++j) {
+        if (pessoaID == planos[j].id && strcmp(tipoRefeicao, planos[j].tipoRefeicao) == 0) {
+            for (int k = 0; k < numDietas; ++k) {
+                if (pessoaID == dietas[k].id && planos[j].dia == dietas[k].dia &&
+                    comparaData(dietas[k].ano, dietas[k].mes, dietas[k].dia, startAno, startMes, startDia) >= 0 &&
+                    comparaData(endAno, endMes, endDia, dietas[k].ano, dietas[k].mes, dietas[k].dia) >= 0 &&
+                    strcmp(dietas[k].tipoRefeicao, tipoRefeicao) == 0) {
+                    printf("- Dia: %d - Refeicao: %s - Max Calorias: %d - Min Calorias: %d\n",
+                           dietas[k].dia, dietas[k].tipoRefeicao, planos[j].maxCal, planos[j].minCal);
+                    found = true;  // Set the flag to true if at least one plano is found
+                }
+            }
+        }
+    }
+
+    if (!found) {
+        printf("Nenhum plano encontrado para as condições especificadas.\n");
+    }
+}
 
 
 
