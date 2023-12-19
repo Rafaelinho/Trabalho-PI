@@ -78,7 +78,7 @@
 0003;2023-01-15;jantar;Lentil curry with brown rice;700
 0001;2023-01-20;almoço;Greek chicken souvlaki;500
 0002;2023-01-26;pequeno almoço;Whole grain toast with almond butter;350
-0003;2023-01-31;jantar;Vegetable lasagna;600
+0003;2023-01-31;jantar;Vegetable lasagna;1600
 0001;2023-01-06;almoço;Cobb salad with grilled chicken;450
 0002;2023-01-12;pequeno almoço;Berry and spinach smoothie;300
 0003;2023-01-17;jantar;Sweet potato and black bean enchiladas;550

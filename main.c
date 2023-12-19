@@ -244,7 +244,7 @@ bool pessoaExcedeuPlano(Dieta dietas[], Plano planos[], Pessoa pessoas[], int pe
                     comparaData(dietas[j].ano, dietas[j].mes, dietas[j].dia, startAno, startMes, startDia) >= 0 &&
                     comparaData(endAno, endMes, endDia, dietas[j].ano, dietas[j].mes, dietas[j].dia) >= 0 &&
                     strcmp(dietas[j].tipoRefeicao, planos[i].tipoRefeicao) == 0) {
-                    printf("ID Paciente: %d\n - Nome: %s\n - Dia do Plano Excedido: %d\n - Tipo de Refeição: %s\n - Diferença de Calorias: %d\n\n",
+                    printf("ID Paciente: %d\n - Nome: %s\n - Dia do Plano Excedido: %d\n - Tipo de Refeicao: %s\n - Diferenca de Calorias: %d\n\n",
                            pessoaID, pessoas[pessoaID-1].nome, dietas[j].dia, dietas[j].tipoRefeicao, dietas[j].calorias - planos[i].maxCal);
                     pessoaExcedeu = true;
                 }
