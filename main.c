@@ -44,6 +44,7 @@ void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano plan
 bool pessoaExcedeuPlano(Dieta dietas[], Plano planos[], Pessoa pessoas[], int pessoaID, int numDietas, int numPlanos, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
 void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numDietas, int numPlanos, int numPessoas, int pessoaID, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno, const char *tipoRefeicao);
 void calcularMediasCalorias(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno);
+void gerarTabela(Dieta dietas[], Pessoa pessoas[], Plano planos[], int numDietas, int numPessoas, int numPlanos);
 
 int main()
 {
