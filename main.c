@@ -186,8 +186,12 @@ int main()
             }
 
         case 5:
-           
-            break;
+            {
+                gerarTabela(dietas, pessoas, planos, numDietas, numPessoas, numPlanos);
+                system("pause");
+                break;
+            }
+
         case 6:
            
             break;
@@ -300,6 +304,28 @@ void listaNaoCumpridoresDecrescente(Dieta dietas[], Pessoa pessoas[], Plano plan
     }
 }
 
+void calcularMediasCalorias(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) 
+{
+    printf("Medias de calorias consumidas por refeicao por cada paciente:\n");
+
+    for (int i = 0; i < numPessoas; ++i) {
+        int totalCalorias = 0;
+        int numRefeicoes = 0;
+
+        for (int j = 0; j < numDietas; ++j) {
+            if (pessoas[i].id == dietas[j].id && comparaData(startAno, startMes, startDia, dietas[j].ano, dietas[j].mes, dietas[j].dia) <= 0 &&
+                comparaData(dietas[j].ano, dietas[j].mes, dietas[j].dia, endAno, endMes, endDia) <= 0) {
+                totalCalorias += dietas[j].calorias;
+                numRefeicoes++;
+            }
+        }
+
+        if (numRefeicoes > 0) {
+            double mediaCalorias = (double)totalCalorias / numRefeicoes;
+            printf("ID Paciente : %d\n - Nome: %s\n - Media de Calorias por Refeicaoo: %.2lf\n\n", pessoas[i].id, pessoas[i].nome, mediaCalorias);
+        }
+    }
+}
 
 
 void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numDietas, int numPlanos, int numPessoas, int pessoaID, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno, const char *tipoRefeicao) 
@@ -328,28 +354,28 @@ void listaPlanoPessoa(Dieta dietas[], Plano planos[], Pessoa pessoas[], int numD
     }
 }
 
-void calcularMediasCalorias(Dieta dietas[], Pessoa pessoas[], int numDietas, int numPessoas, int startDia, int startMes, int startAno, int endDia, int endMes, int endAno) 
-{
-    printf("Medias de calorias consumidas por refeicao por cada paciente:\n");
+
+void gerarTabela(Dieta dietas[], Pessoa pessoas[], Plano planos[], int numDietas, int numPessoas, int numPlanos) {
+    printf("Tabela de Refeições Planeadas e Realizadas\n");
+    printf("| %-6s | %-15s | %-20s | %-10s | %-10s | %-15s | %-15s | %-20s | %-18s |\n",
+           "Paciente", "Nome", "Tipo Refeicao", "Data Inicio", "Data Fim", "Calorias Minimo", "Calorias Maximo", "Consumo Realizado", "Excedeu Plano");
 
     for (int i = 0; i < numPessoas; ++i) {
-        int totalCalorias = 0;
-        int numRefeicoes = 0;
-
-        for (int j = 0; j < numDietas; ++j) {
-            if (pessoas[i].id == dietas[j].id && comparaData(startAno, startMes, startDia, dietas[j].ano, dietas[j].mes, dietas[j].dia) <= 0 &&
-                comparaData(dietas[j].ano, dietas[j].mes, dietas[j].dia, endAno, endMes, endDia) <= 0) {
-                totalCalorias += dietas[j].calorias;
-                numRefeicoes++;
+        for (int j = 0; j < numPlanos; ++j) {
+            if (pessoas[i].id == planos[j].id) {
+                for (int k = 0; k < numDietas; ++k) {
+                    if (pessoas[i].id == dietas[k].id && planos[j].dia == dietas[k].dia &&
+                        strcmp(dietas[k].tipoRefeicao, planos[j].tipoRefeicao) == 0) {
+                        printf("| %-8d | %-15s | %-20s | %04d-%02d-%02d | %04d-%02d-%02d | %-15d | %-15d | %-20d | %-18s |\n",
+                               pessoas[i].id, pessoas[i].nome, dietas[k].tipoRefeicao,
+                               dietas[k].ano, dietas[k].mes, dietas[k].dia,
+                               planos[j].ano, planos[j].mes, planos[j].dia,
+                               planos[j].minCal, planos[j].maxCal, dietas[k].calorias,
+                               (dietas[k].calorias > planos[j].maxCal) ? "Sim" : "Nao");
+                    }
+                }
             }
-        }
-
-        if (numRefeicoes > 0) {
-            double mediaCalorias = (double)totalCalorias / numRefeicoes;
-            printf("ID Paciente : %d\n - Nome: %s\n - Media de Calorias por Refeicaoo: %.2lf\n\n", pessoas[i].id, pessoas[i].nome, mediaCalorias);
         }
     }
 }
-
-
 
